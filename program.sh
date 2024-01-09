@@ -42,16 +42,17 @@ if [ -e summary.txt ]; then
 fi
 cd ..
 cd Data
-#writing data into each file using a for loop
+#writing the number of lines in each file using a for loop
 for i in {1..10}
  do
-   echo "no of lines in file$i.txt is $(wc -l  file$i.txt)"  >>  /home/xpmini03/ProjectData/Reports/summary.txt
-   
+   echo "file$i contains  $(wc -l) lines"  >>  /home/xpmini03/ProjectData/Reports/summary.txt
  done
  cat /home/xpmini03/ProjectData/Reports/summary.txt
 #creating the logdata file
-if [ -e logdata.txt ]; then
-   rm logdata.txt
+cd ..
+cd Logs
+if [ ! -e logdata.txt ]; then
+    logdata.txt
 fi
 echo "The time and date when the program is running is $(date)" >> logdata.txt
 # to print the logdata recorded
