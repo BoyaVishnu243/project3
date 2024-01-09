@@ -24,7 +24,7 @@ ls -l
 #To create 10 files inside Data
 cd Data
 if [ ! -e file1.txt ]; then
-
+#starting of a for loop
   for i in {1..10}
   do
 	touch file$i.txt
@@ -42,16 +42,18 @@ if [ -e summary.txt ]; then
 fi
 cd ..
 cd Data
-
+#writing data into each file using a for loop
 for i in {1..10}
  do
    echo "no of lines in file$i.txt is $(wc -l  file$i.txt)"  >>  /home/xpmini03/ProjectData/Reports/summary.txt
    
  done
  cat /home/xpmini03/ProjectData/Reports/summary.txt
+#creating the logdata file
 if [ -e logdata.txt ]; then
    rm logdata.txt
 fi
 echo "The time and date when the program is running is $(date)" >> logdata.txt
+# to print the logdata recorded
 cat logdata.txt
 
