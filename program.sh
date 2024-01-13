@@ -1,57 +1,73 @@
 #!/bin/bash
-#To create a directory named ProjectData
+#To create a directory named ProjectData in user's home directory
 clear
 cd
 if [ ! -d ProjectData ]; then
-	echo "projectData does not exist. Creating it..."
-	mkdir ProjectData
+   echo "projectData does not exist. Creating it..."
+   mkdir ProjectData
+else
+   echo "ProjectData directory exists"
 fi
-echo "ProjectData directory is created"
-
 cd ProjectData
 #To create three directories inside the projectData
-if [ ! -d Reports ] || [ ! -d Logs ] || [ ! -d Data ];then
-	echo "Reports does not exist. Creating it..."
-	mkdir Reports
-	echo "Logs does not exist. Creatig it..."
-	mkdir Logs
-	echo "Data does not exist. Creating it..."
-	mkdir Data
+if [ ! -d Reports ];then
+   echo "Reports does not exist. Creating it..."
+   mkdir Reports
+else
+   echo "Reports directory exists"
+fi
+if [ ! -d Logs ];then
+   echo "Logs does not exist. Creatig it..."
+   mkdir Logs
+else
+   echo "Logs directry exists"
+fi
+if [ ! -d Data ];then
+   echo "Data does not exist. Creating it..."
+   mkdir Data
+else
+   echo "Data directory exists"
 fi
 echo "The three sub-directories are created"
 ls -l
-
 #To create 10 files inside Data
 cd Data
-if [ ! -e file1.txt ]; then
-
-  for i in {1..10}
-  do
-	touch file$i.txt
-	echo -e "gqiudcgiu gsugicg \n sugiugg uguidg kgkags\nugiug iusdfiug iuvguisgi \n uggsdusg" > file$i.txt
-  done
-fi
+for i in {1..10}
+do
+     if [ ! -e file$i.txt ];then
+   touch file$i.txt
+   echo -e "This is a file named file$i \n this is second line" >> file$i.txt
+     else
+        rm file$i.txt
+        touch file$i.txt
+        echo -e "This is a file named file$i \n this is second line" >> file$i.txt
+     fi
+done
 echo "In the Data directory 10 files are created"
 cd ..
 cd Reports
 #To count number of lines in each file
 if [ -e summary.txt ]; then
-  echo "summary file exist. Creating it...\n Removing it and creating a new one"
+  echo -e  "summary file exist.\n Removing it and creating a new one"
   rm summary.txt
   touch summary.txt
+else
+   touch summary.txt
 fi
+#File Processing
 cd ..
 cd Data
-
 for i in {1..10}
- do
-   echo "no of lines in file$i.txt is $(wc -l  file$i.txt)"  >>  /home/xpmini03/ProjectData/Reports/summary.txt
-   
- done
- cat /home/xpmini03/ProjectData/Reports/summary.txt
-if [ -e logdata.txt ]; then
-   rm logdata.txt
+do
+   echo "file$i : No of lines in file$i is $(wc -l file$i.txt)"  >>  ~/ProjectData/Reports/summary.txt
+done
+cat ~/ProjectData/Reports/summary.txt
+#creating the logdata file
+cd ..
+cd Logs
+if [ ! -e logdata.txt ]; then
+   touch logdata.txt
+else
+   echo "The time and date when the program is running is $(date)" >> logdata.txt
 fi
-echo "The time and date when the program is running is $(date)" >> logdata.txt
 cat logdata.txt
-
